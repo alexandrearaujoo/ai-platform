@@ -5,7 +5,7 @@ import { Form, FormControl, FormField, FormItem } from '../ui/form';
 import { Input } from '../ui/input';
 import Spinner from '../ui/spinner';
 
-import { useConversationForm } from '@/hooks/useConversationForm';
+import { useConversation } from '@/hooks/useConversation';
 
 const ConversationForm = () => {
   const {
@@ -15,7 +15,7 @@ const ConversationForm = () => {
     onSubmit,
     errors,
     isSubmitting
-  } = useConversationForm();
+  } = useConversation();
 
   return (
     <div>

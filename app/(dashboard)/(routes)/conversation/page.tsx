@@ -1,3 +1,4 @@
+import MessagesContent from './components/messages-content';
 import ConversationForm from '@/components/forms/conversation-form';
 import Heading from '@/components/heading';
 
@@ -16,7 +17,9 @@ export default function ConversationPage() {
       <section className="px-4 lg:px-8">
         <ConversationForm />
       </section>
-      <section className="mt-4 space-y-4">Messages content</section>
+      <section className="mt-4 space-y-4">
+        <MessagesContent />
+      </section>
     </section>
   );
 }

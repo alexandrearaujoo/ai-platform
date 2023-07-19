@@ -21,10 +21,9 @@ export const useConversation = () => {
   });
 
   const {
-    register,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting }
+    formState: { isSubmitting }
   } = conversationForm;
 
   const onSubmit = async (data: ConversationRequest) => {
@@ -49,11 +48,9 @@ export const useConversation = () => {
   };
 
   return {
-    register,
     onSubmit,
     handleSubmit,
     conversationForm,
-    errors,
     isSubmitting,
     messages
   };

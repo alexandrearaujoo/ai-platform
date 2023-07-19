@@ -1,21 +1,21 @@
 'use client';
 
 import { Button } from '../ui/button';
-import { Form, FormControl, FormField, FormItem } from '../ui/form';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormMessage
+} from '../ui/form';
 import { Input } from '../ui/input';
 import Spinner from '../ui/spinner';
 
 import { useConversation } from '@/hooks/useConversation';
 
 const ConversationForm = () => {
-  const {
-    conversationForm,
-    register,
-    handleSubmit,
-    onSubmit,
-    errors,
-    isSubmitting
-  } = useConversation();
+  const { conversationForm, handleSubmit, onSubmit, isSubmitting } =
+    useConversation();
 
   return (
     <div>
@@ -36,6 +36,7 @@ const ConversationForm = () => {
                     {...field}
                   />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />

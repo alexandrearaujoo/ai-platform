@@ -1,3 +1,5 @@
+import { usePathname } from 'next/navigation';
+
 import {
   Code,
   ImageIcon,
@@ -9,6 +11,7 @@ import {
 } from 'lucide-react';
 
 export const useRoutes = () => {
+  const pathname = usePathname();
   const routes = [
     {
       id: 1,
@@ -60,5 +63,5 @@ export const useRoutes = () => {
     }
   ];
 
-  return { routes };
+  return { routes, pathname };
 };

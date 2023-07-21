@@ -3,11 +3,11 @@
 import Empty from '@/components/empty';
 import Loader from '@/components/loader';
 
-import { useMusic } from '@/hooks/useMusic';
+import { musicStore } from '@/stores/musicStore';
 
 const MusicContent = () => {
-  const { music, isSubmitting } = useMusic();
-
+  const music = musicStore((state) => state.music);
+  const isSubmitting = musicStore((state) => state.isLoading);
   return (
     <>
       {isSubmitting && (

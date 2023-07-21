@@ -1,13 +1,14 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { MusicRequest, musicSchema } from '@/schemas/musicSchema';
+import { musicStore } from '@/stores/musicStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 
 export const useMusic = () => {
-  const [music, setMusic] = useState<string>();
+  const setMusic = musicStore((state) => state.setMusic);
+  const setLoading = musicStore((state) => state.setLoading);
   const router = useRouter();
   const musicForm = useForm<MusicRequest>({
     resolver: zodResolver(musicSchema),
@@ -23,16 +24,16 @@ export const useMusic = () => {
   } = musicForm;
 
   const onSubmit = async (data: MusicRequest) => {
+    setLoading(true);
     try {
       setMusic(undefined);
-
       const { data: res } = await axios.post('/api/music', data);
-
-      setMusic(res.audio);
+      setMusic(res);
       reset();
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       router.refresh();
     }
   };
@@ -41,7 +42,6 @@ export const useMusic = () => {
     onSubmit,
     handleSubmit,
     musicForm,
-    isSubmitting,
-    music
+    isSubmitting
   };
 };

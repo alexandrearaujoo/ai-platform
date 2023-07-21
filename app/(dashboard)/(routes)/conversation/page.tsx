@@ -17,7 +17,7 @@ export default function ConversationPage() {
       <section className="px-4 lg:px-8">
         <ConversationForm />
       </section>
-      <section className="mt-4 space-y-4">
+      <section className="mt-4 space-y-4 px-4 pb-4 lg:px-8">
         <MessagesContent />
       </section>
     </section>

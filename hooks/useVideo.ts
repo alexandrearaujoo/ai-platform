@@ -1,17 +1,17 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
-import { MusicRequest, musicSchema } from '@/schemas/musicSchema';
-import { musicStore } from '@/stores/musicStore';
+import { VideoRequest, videoSchema } from '@/schemas/videoSchema';
+import { videoStore } from '@/stores/videoStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 
-export const useMusic = () => {
-  const setMusic = musicStore((state) => state.setMusic);
-  const setLoading = musicStore((state) => state.setLoading);
+export const useVideo = () => {
+  const setVideo = videoStore((state) => state.setVideo);
+  const setLoading = videoStore((state) => state.setLoading);
   const router = useRouter();
-  const musicForm = useForm<MusicRequest>({
-    resolver: zodResolver(musicSchema),
+  const videoForm = useForm<VideoRequest>({
+    resolver: zodResolver(videoSchema),
     defaultValues: {
       prompt: ''
     }
@@ -21,14 +21,14 @@ export const useMusic = () => {
     handleSubmit,
     reset,
     formState: { isSubmitting }
-  } = musicForm;
+  } = videoForm;
 
-  const onSubmit = async (data: MusicRequest) => {
+  const onSubmit = async (data: VideoRequest) => {
     setLoading(true);
     try {
-      setMusic(undefined);
-      const { data: res } = await axios.post('/api/music', data);
-      setMusic(res.audio);
+      setVideo(undefined);
+      const { data: res } = await axios.post('/api/video', data);
+      setVideo(res[0]);
       reset();
     } catch (error) {
       console.log(error);
@@ -41,7 +41,7 @@ export const useMusic = () => {
   return {
     onSubmit,
     handleSubmit,
-    musicForm,
+    videoForm,
     isSubmitting
   };
 };

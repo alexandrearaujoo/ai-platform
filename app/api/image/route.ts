@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 
+import { checkApiLimit, increaseApiLimit } from '@/lib/apiLimit';
 import { config, openai } from '@/lib/openai';
 import { auth } from '@clerk/nextjs';
 
@@ -20,6 +21,12 @@ export async function POST(req: Request) {
       return new NextResponse('Missing prompt', { status: 400 });
     }
 
+    const freeTrial = await checkApiLimit();
+
+    if (!freeTrial) {
+      return new NextResponse('Free trial has expired.', { status: 403 });
+    }
+
     const {
       data: { data }
     } = await openai.createImage({
@@ -27,6 +34,8 @@ export async function POST(req: Request) {
       n: parseInt(amount, 10),
       size: resolution
     });
+
+    await increaseApiLimit();
 
     return NextResponse.json(data);
   } catch (error) {

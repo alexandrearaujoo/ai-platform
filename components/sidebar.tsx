@@ -4,12 +4,16 @@ import { Montserrat } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import FreeCounter from './free-counter';
+import { Progress } from './ui/progress';
+
+import { MAX_API_FREE_COUNT } from '@/constants/apiLimit';
 import { useRoutes } from '@/hooks/useRoutes';
 import { cn } from '@/lib/utils';
 
 const montserrat = Montserrat({ weight: '600', subsets: ['latin'] });
 
-const SideBar = () => {
+const SideBar = ({ apiLimitCount = 0 }: { apiLimitCount: number }) => {
   const { routes, pathname } = useRoutes();
 
   return (
@@ -46,6 +50,15 @@ const SideBar = () => {
           </ul>
         </nav>
       </article>
+      <FreeCounter>
+        <p className="mb-4 space-y-2 text-center text-sm text-white">
+          {apiLimitCount} / {MAX_API_FREE_COUNT} Gerações Gratis!
+        </p>
+        <Progress
+          className="mb-4 h-3"
+          value={(apiLimitCount / MAX_API_FREE_COUNT) * 100}
+        />
+      </FreeCounter>
     </aside>
   );
 };

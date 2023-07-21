@@ -2,13 +2,15 @@ import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 
 import { MusicRequest, musicSchema } from '@/schemas/musicSchema';
+import { modalStore } from '@/stores/modaStore';
 import { musicStore } from '@/stores/musicStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export const useMusic = () => {
   const setMusic = musicStore((state) => state.setMusic);
   const setLoading = musicStore((state) => state.setLoading);
+  const openModal = modalStore((state) => state.openModal);
   const router = useRouter();
   const musicForm = useForm<MusicRequest>({
     resolver: zodResolver(musicSchema),
@@ -31,7 +33,12 @@ export const useMusic = () => {
       setMusic(res.audio);
       reset();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 403) {
+          openModal();
+          return;
+        }
+      }
     } finally {
       setLoading(false);
       router.refresh();

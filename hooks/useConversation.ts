@@ -6,14 +6,16 @@ import {
   type ConversationRequest
 } from '@/schemas/conversationSchema';
 import { messageStore } from '@/stores/messageStore';
+import { modalStore } from '@/stores/modaStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { ChatCompletionRequestMessage } from 'openai';
 
 export const useConversation = () => {
   const messages = messageStore((state) => state.messages);
   const setMessages = messageStore((state) => state.setMessages);
   const setLoading = messageStore((state) => state.setLoading);
+  const openModal = modalStore((state) => state.openModal);
   const router = useRouter();
   const conversationForm = useForm<ConversationRequest>({
     resolver: zodResolver(conversationSchema),
@@ -43,7 +45,12 @@ export const useConversation = () => {
       setMessages([...messages, userMessage, res]);
       reset();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 403) {
+          openModal();
+          return;
+        }
+      }
     } finally {
       setLoading(false);
       router.refresh();

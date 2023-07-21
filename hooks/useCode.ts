@@ -3,14 +3,16 @@ import { useForm } from 'react-hook-form';
 
 import { CodeRequest, codeSchema } from '@/schemas/codeSchema';
 import { codeStore } from '@/stores/codeStore';
+import { modalStore } from '@/stores/modaStore';
 import { zodResolver } from '@hookform/resolvers/zod';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 import { ChatCompletionRequestMessage } from 'openai';
 
 export const useCode = () => {
   const messages = codeStore((state) => state.messages);
   const setMessages = codeStore((state) => state.setMessages);
   const setLoading = codeStore((state) => state.setLoading);
+  const openModal = modalStore((state) => state.openModal);
   const router = useRouter();
   const codeForm = useForm<CodeRequest>({
     resolver: zodResolver(codeSchema),
@@ -40,7 +42,12 @@ export const useCode = () => {
       setMessages([...messages, userMessage, res]);
       reset();
     } catch (error) {
-      console.log(error);
+      if (error instanceof AxiosError) {
+        if (error.response?.status === 403) {
+          openModal();
+          return;
+        }
+      }
     } finally {
       setLoading(false);
       router.refresh();

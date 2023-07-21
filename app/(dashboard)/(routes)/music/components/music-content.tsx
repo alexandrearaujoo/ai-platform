@@ -8,6 +8,7 @@ import { musicStore } from '@/stores/musicStore';
 const MusicContent = () => {
   const music = musicStore((state) => state.music);
   const isSubmitting = musicStore((state) => state.isLoading);
+
   return (
     <>
       {isSubmitting && (

@@ -3,12 +3,14 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { ImageRequest, imageSchema } from '@/schemas/imageSchema';
+import { imageStore } from '@/stores/imageStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 
 export const useImage = () => {
+  const setImages = imageStore((state) => state.setImages);
+  const setLoading = imageStore((state) => state.setLoading);
   const router = useRouter();
-  const [images, setImages] = useState<string[]>([]);
   const imageForm = useForm<ImageRequest>({
     resolver: zodResolver(imageSchema),
     defaultValues: {
@@ -26,7 +28,7 @@ export const useImage = () => {
   } = imageForm;
 
   const onSubmit = async (data: ImageRequest) => {
-    console.log(data);
+    setLoading(true);
     try {
       setImages([]);
 
@@ -40,6 +42,7 @@ export const useImage = () => {
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       router.refresh();
     }
   };
@@ -49,7 +52,6 @@ export const useImage = () => {
     handleSubmit,
     imageForm,
     isSubmitting,
-    images,
     control
   };
 };

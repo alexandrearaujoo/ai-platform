@@ -1,4 +1,4 @@
-import MusicContent from './components/messages-content';
+import MusicContent from './components/music-content';
 import MusicForm from '@/components/forms/music-form';
 import Heading from '@/components/heading';
 

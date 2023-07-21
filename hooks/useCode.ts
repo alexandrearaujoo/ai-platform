@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { CodeRequest, codeSchema } from '@/schemas/codeSchema';
+import { codeStore } from '@/stores/codeStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ChatCompletionRequestMessage } from 'openai';
 
 export const useCode = () => {
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const messages = codeStore((state) => state.messages);
+  const setMessages = codeStore((state) => state.setMessages);
+  const setLoading = codeStore((state) => state.setLoading);
   const router = useRouter();
   const codeForm = useForm<CodeRequest>({
     resolver: zodResolver(codeSchema),
@@ -24,7 +27,7 @@ export const useCode = () => {
   } = codeForm;
 
   const onSubmit = async (data: CodeRequest) => {
-    console.log(data);
+    setLoading(true);
     try {
       const userMessage: ChatCompletionRequestMessage = {
         role: 'user',
@@ -35,11 +38,12 @@ export const useCode = () => {
       const { data: res } = await axios.post('/api/code', {
         messages: newMessages
       });
-      setMessages((current) => [...current, userMessage, res]);
+      setMessages([...messages, userMessage, res]);
       reset();
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       router.refresh();
     }
   };
@@ -48,7 +52,6 @@ export const useCode = () => {
     onSubmit,
     handleSubmit,
     codeForm,
-    isSubmitting,
-    messages
+    isSubmitting
   };
 };

@@ -1,17 +1,19 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import {
   conversationSchema,
   type ConversationRequest
 } from '@/schemas/conversationSchema';
+import { messageStore } from '@/stores/messageStore';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from 'axios';
 import { ChatCompletionRequestMessage } from 'openai';
 
 export const useConversation = () => {
-  const [messages, setMessages] = useState<ChatCompletionRequestMessage[]>([]);
+  const messages = messageStore((state) => state.messages);
+  const setMessages = messageStore((state) => state.setMessages);
+  const setLoading = messageStore((state) => state.setLoading);
   const router = useRouter();
   const conversationForm = useForm<ConversationRequest>({
     resolver: zodResolver(conversationSchema),
@@ -27,7 +29,7 @@ export const useConversation = () => {
   } = conversationForm;
 
   const onSubmit = async (data: ConversationRequest) => {
-    console.log(data);
+    setLoading(true);
     try {
       const userMessage: ChatCompletionRequestMessage = {
         role: 'user',
@@ -38,11 +40,12 @@ export const useConversation = () => {
       const { data: res } = await axios.post('/api/conversation', {
         messages: newMessages
       });
-      setMessages((current) => [...current, userMessage, res]);
+      setMessages([...messages, userMessage, res]);
       reset();
     } catch (error) {
       console.log(error);
     } finally {
+      setLoading(false);
       router.refresh();
     }
   };
@@ -51,7 +54,6 @@ export const useConversation = () => {
     onSubmit,
     handleSubmit,
     conversationForm,
-    isSubmitting,
-    messages
+    isSubmitting
   };
 };

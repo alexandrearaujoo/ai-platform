@@ -5,11 +5,12 @@ import Empty from '@/components/empty';
 import Loader from '@/components/loader';
 import UserAvatar from '@/components/user-avatar';
 
-import { useConversation } from '@/hooks/useConversation';
 import { cn } from '@/lib/utils';
+import { messageStore } from '@/stores/messageStore';
 
 const MessagesContent = () => {
-  const { messages, isSubmitting } = useConversation();
+  const messages = messageStore((state) => state.messages);
+  const isSubmitting = messageStore((state) => state.isLoading);
 
   return (
     <>

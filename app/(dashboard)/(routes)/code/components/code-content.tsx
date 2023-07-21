@@ -7,11 +7,12 @@ import Empty from '@/components/empty';
 import Loader from '@/components/loader';
 import UserAvatar from '@/components/user-avatar';
 
-import { useCode } from '@/hooks/useCode';
 import { cn } from '@/lib/utils';
+import { codeStore } from '@/stores/codeStore';
 
-const MessagesContent = () => {
-  const { messages, isSubmitting } = useCode();
+const CodeContent = () => {
+  const messages = codeStore((state) => state.messages);
+  const isSubmitting = codeStore((state) => state.isLoading);
 
   return (
     <>
@@ -57,4 +58,4 @@ const MessagesContent = () => {
   );
 };
 
-export default MessagesContent;
+export default CodeContent;

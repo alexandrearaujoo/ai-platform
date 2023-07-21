@@ -1,4 +1,4 @@
-import MessagesContent from './components/messages-content';
+import CodeContent from './components/code-content';
 import CodeForm from '@/components/forms/code-form';
 import Heading from '@/components/heading';
 
@@ -18,7 +18,7 @@ export default function CodePage() {
         <CodeForm />
       </section>
       <section className="mt-4 space-y-4">
-        <MessagesContent />
+        <CodeContent />
       </section>
     </section>
   );

@@ -1,4 +1,4 @@
-import MessagesContent from './components/messages-content';
+import ImagesContent from './components/images-content';
 import ImageForm from '@/components/forms/image-form';
 import Heading from '@/components/heading';
 
@@ -18,7 +18,7 @@ export default function ImagePage() {
         <ImageForm />
       </section>
       <section className="mt-4 space-y-4">
-        <MessagesContent />
+        <ImagesContent />
       </section>
     </section>
   );

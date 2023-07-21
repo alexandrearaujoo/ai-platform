@@ -7,11 +7,12 @@ import Loader from '@/components/loader';
 import { Button } from '@/components/ui/button';
 import { Card, CardFooter } from '@/components/ui/card';
 
-import { useImage } from '@/hooks/useImage';
+import { imageStore } from '@/stores/imageStore';
 import { Download } from 'lucide-react';
 
-const MessagesContent = () => {
-  const { images, isSubmitting } = useImage();
+const ImagesContent = () => {
+  const images = imageStore((state) => state.images);
+  const isSubmitting = imageStore((state) => state.isLoading);
 
   return (
     <>
@@ -48,4 +49,4 @@ const MessagesContent = () => {
   );
 };
 
-export default MessagesContent;
+export default ImagesContent;

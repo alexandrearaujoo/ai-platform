@@ -13,7 +13,13 @@ import { cn } from '@/lib/utils';
 
 const montserrat = Montserrat({ weight: '600', subsets: ['latin'] });
 
-const SideBar = ({ apiLimitCount = 0 }: { apiLimitCount: number }) => {
+const SideBar = ({
+  apiLimitCount = 0,
+  isPro = false
+}: {
+  apiLimitCount: number;
+  isPro: boolean;
+}) => {
   const { routes, pathname } = useRoutes();
 
   return (
@@ -50,15 +56,17 @@ const SideBar = ({ apiLimitCount = 0 }: { apiLimitCount: number }) => {
           </ul>
         </nav>
       </article>
-      <FreeCounter>
-        <p className="mb-4 space-y-2 text-center text-sm text-white">
-          {apiLimitCount} / {MAX_API_FREE_COUNT} Gerações Gratis!
-        </p>
-        <Progress
-          className="mb-4 h-3"
-          value={(apiLimitCount / MAX_API_FREE_COUNT) * 100}
-        />
-      </FreeCounter>
+      {isPro ? null : (
+        <FreeCounter>
+          <p className="mb-4 space-y-2 text-center text-sm text-white">
+            {apiLimitCount} / {MAX_API_FREE_COUNT} Gerações Gratis!
+          </p>
+          <Progress
+            className="mb-4 h-3"
+            value={(apiLimitCount / MAX_API_FREE_COUNT) * 100}
+          />
+        </FreeCounter>
+      )}
     </aside>
   );
 };

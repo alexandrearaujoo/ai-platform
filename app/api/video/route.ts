@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 
 import { checkApiLimit, increaseApiLimit } from '@/lib/apiLimit';
 import { replicate } from '@/lib/replicate';
+import { checkSubscription } from '@/lib/subscription';
 import { auth } from '@clerk/nextjs';
 import console from 'console';
 
@@ -18,9 +19,12 @@ export async function POST(req: Request) {
       return new NextResponse('Missing prompt', { status: 400 });
     }
 
-    const freeTrial = await checkApiLimit();
+    const [freeTrial, isPro] = await Promise.all([
+      checkApiLimit(),
+      checkSubscription()
+    ]);
 
-    if (!freeTrial) {
+    if (!freeTrial && !isPro) {
       return new NextResponse('Free trial has expired.', { status: 403 });
     }
 
@@ -33,7 +37,7 @@ export async function POST(req: Request) {
       }
     );
 
-    await increaseApiLimit();
+    if (!isPro) await increaseApiLimit();
 
     return NextResponse.json(res);
   } catch (error) {

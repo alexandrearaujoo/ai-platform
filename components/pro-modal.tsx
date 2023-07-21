@@ -1,5 +1,7 @@
 'use client';
 
+import { useState } from 'react';
+
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Card } from './ui/card';
@@ -14,11 +16,26 @@ import {
 
 import { tools } from '@/constants/tools';
 import { modalStore } from '@/stores/modaStore';
+import axios from 'axios';
 import { Check, Zap } from 'lucide-react';
 
 const ProModal = () => {
+  const [loading, setLoading] = useState(false);
   const open = modalStore((state) => state.isOpen);
   const onClose = modalStore((state) => state.closeModal);
+
+  const onSubscribe = async () => {
+    setLoading(true);
+    try {
+      const { data } = await axios.get('/api/stripe');
+
+      window.location.href = data.url;
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <Dialog open={open} onOpenChange={onClose}>
@@ -53,7 +70,12 @@ const ProModal = () => {
           </DialogDescription>
         </DialogHeader>
         <DialogFooter>
-          <Button size="lg" variant="premium" className="w-full">
+          <Button
+            size="lg"
+            variant="premium"
+            className="w-full"
+            onClick={onSubscribe}
+          >
             Atualizar <Zap className="ml-2 h-4 w-4 fill-white" />
           </Button>
         </DialogFooter>

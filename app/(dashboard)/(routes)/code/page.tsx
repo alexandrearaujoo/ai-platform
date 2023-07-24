@@ -1,8 +1,15 @@
+import { Metadata } from 'next';
+
 import CodeContent from './components/code-content';
 import CodeForm from '@/components/forms/code-form';
 import Heading from '@/components/heading';
 
 import { Code } from 'lucide-react';
+
+export const metadata: Metadata = {
+  title: 'Geração de Código',
+  icons: { icon: '/code.png' }
+};
 
 export default function CodePage() {
   return (

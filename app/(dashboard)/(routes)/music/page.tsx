@@ -4,6 +4,11 @@ import Heading from '@/components/heading';
 
 import { Music } from 'lucide-react';
 
+export const metadata = {
+  title: 'Geração de Música',
+  icons: { icon: '/music.png' }
+};
+
 export default function MusicPage() {
   return (
     <section>

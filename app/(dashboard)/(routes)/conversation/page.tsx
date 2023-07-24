@@ -4,6 +4,11 @@ import Heading from '@/components/heading';
 
 import { MessageSquare } from 'lucide-react';
 
+export const metadata = {
+  title: 'Bate-Papo',
+  icons: { icon: '/chat.png' }
+};
+
 export default function ConversationPage() {
   return (
     <section>

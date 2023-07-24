@@ -1,5 +1,10 @@
 import ToolsList from './components/tools-list';
 
+export const metadata = {
+  title: 'Dashboard',
+  icons: { icon: '/dashboard.png' }
+};
+
 export default function DashboardPage() {
   return (
     <section>

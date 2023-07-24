@@ -5,6 +5,11 @@ import { Badge } from '@/components/ui/badge';
 import { checkSubscription } from '@/lib/subscription';
 import { Settings } from 'lucide-react';
 
+export const metadata = {
+  title: 'Configurações',
+  icons: { icon: '/settings.png' }
+};
+
 export default async function SettingsPage() {
   const isPro = await checkSubscription();
 

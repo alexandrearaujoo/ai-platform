@@ -4,6 +4,11 @@ import Heading from '@/components/heading';
 
 import { ImageIcon } from 'lucide-react';
 
+export const metadata = {
+  title: 'Geração de Imagens',
+  icons: { icon: '/image.png' }
+};
+
 export default function ImagePage() {
   return (
     <section>

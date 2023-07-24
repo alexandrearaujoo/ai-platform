@@ -4,6 +4,11 @@ import Heading from '@/components/heading';
 
 import { Video } from 'lucide-react';
 
+export const metadata = {
+  title: 'Geração de Vídeo',
+  icons: { icon: '/video.png' }
+};
+
 export default function VideoPage() {
   return (
     <section>

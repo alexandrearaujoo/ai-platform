@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
         <CrispProvider />
         <body className={inter.className}>
           <Toaster position="bottom-right" />
-          <TopLoader />
+          <TopLoader color="#c026d3" />
           {children}
         </body>
       </html>

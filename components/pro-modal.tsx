@@ -81,6 +81,9 @@ const ProModal = () => {
             Atualizar <Zap className="ml-2 h-4 w-4 fill-white" />
           </Button>
         </DialogFooter>
+        <p className="w-full animate-pulse text-center font-bold text-red-500">
+          Utilize dados fictícios para testar!
+        </p>
       </DialogContent>
     </Dialog>
   );

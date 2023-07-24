@@ -12,5 +12,6 @@ namespace NodeJS {
     DATABASE_URL: string;
     STRIPE_SECRET_KEY: string;
     STRIPE_WEBHOOK_SECRET: string;
+    CRISP_ID: string;
   }
 }

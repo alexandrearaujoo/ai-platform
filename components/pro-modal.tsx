@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
@@ -31,7 +32,7 @@ const ProModal = () => {
 
       window.location.href = data.url;
     } catch (error) {
-      console.log(error);
+      toast.error('Algo deu errado, tente novamente!');
     } finally {
       setLoading(false);
     }
@@ -71,6 +72,7 @@ const ProModal = () => {
         </DialogHeader>
         <DialogFooter>
           <Button
+            disabled={loading}
             size="lg"
             variant="premium"
             className="w-full"

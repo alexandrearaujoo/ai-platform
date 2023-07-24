@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { MusicRequest, musicSchema } from '@/schemas/musicSchema';
 import { modalStore } from '@/stores/modaStore';
@@ -38,7 +39,10 @@ export const useMusic = () => {
           openModal();
           return;
         }
+        toast.error(error.response?.data);
+        return;
       }
+      toast.error('Algo deu errado, tente novamente!');
     } finally {
       setLoading(false);
       router.refresh();

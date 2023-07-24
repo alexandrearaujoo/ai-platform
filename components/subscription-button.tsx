@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { Button } from './ui/button';
 
@@ -15,7 +16,7 @@ const SubscriptionButton = ({ isPro = false }: { isPro: boolean }) => {
       const { data } = await axios.get('/api/stripe');
       window.location.href = data.url;
     } catch (error) {
-      console.log(error);
+      toast.error('Algo deu errado, tente novamente!');
     } finally {
       setLoading(false);
     }

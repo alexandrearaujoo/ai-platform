@@ -1,6 +1,6 @@
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { ImageRequest, imageSchema } from '@/schemas/imageSchema';
 import { imageStore } from '@/stores/imageStore';
@@ -47,7 +47,10 @@ export const useImage = () => {
           openModal();
           return;
         }
+        toast.error(error.response?.data);
+        return;
       }
+      toast.error('Algo deu errado, tente novamente!');
     } finally {
       setLoading(false);
       router.refresh();

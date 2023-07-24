@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { VideoRequest, videoSchema } from '@/schemas/videoSchema';
 import { modalStore } from '@/stores/modaStore';
@@ -39,7 +40,10 @@ export const useVideo = () => {
           openModal();
           return;
         }
+        toast.error(error.response?.data);
+        return;
       }
+      toast.error('Algo deu errado, tente novamente!');
     } finally {
       setLoading(false);
       router.refresh();

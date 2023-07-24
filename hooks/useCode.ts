@@ -1,5 +1,6 @@
 import { useRouter } from 'next/navigation';
 import { useForm } from 'react-hook-form';
+import toast from 'react-hot-toast';
 
 import { CodeRequest, codeSchema } from '@/schemas/codeSchema';
 import { codeStore } from '@/stores/codeStore';
@@ -47,7 +48,10 @@ export const useCode = () => {
           openModal();
           return;
         }
+        toast.error(error.response?.data);
+        return;
       }
+      toast.error('Algo deu errado, tente novamente!');
     } finally {
       setLoading(false);
       router.refresh();

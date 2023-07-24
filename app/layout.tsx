@@ -21,7 +21,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
       <html lang="en">
         <CrispProvider />
         <body className={inter.className}>
-          <Toaster position="bottom-right" />
+          <Toaster />
           <TopLoader color="#c026d3" />
           {children}
         </body>

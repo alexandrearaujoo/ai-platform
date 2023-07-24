@@ -20,9 +20,9 @@ const LandingHero = () => {
               strings: [
                 'Chatbot.',
                 'Geração de Foto.',
-                'Geração de Musica.',
+                'Geração de Música.',
                 'Geração de Código.',
-                'Geração de Video'
+                'Geração de Vídeo'
               ],
               autoStart: true,
               loop: true
@@ -31,7 +31,7 @@ const LandingHero = () => {
         </div>
       </div>
       <p className="text-sm font-light text-zinc-400 md:text-xl">
-        Crie conteudo usando IA 10x mais rapido.
+        Crie conteúdo usando IA 10x mais rápido.
       </p>
       <div>
         <Link href={isSignedIn ? '/dashboard' : '/sign-up'}>
@@ -44,7 +44,7 @@ const LandingHero = () => {
         </Link>
       </div>
       <p className="text-xs font-normal text-zinc-400 md:text-sm">
-        Não é necessario cartao de crédito!
+        Não é necessário cartão de crédito!
       </p>
     </section>
   );

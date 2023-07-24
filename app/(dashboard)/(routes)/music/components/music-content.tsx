@@ -16,7 +16,7 @@ const MusicContent = () => {
           <Loader />
         </div>
       )}
-      {!music && !isSubmitting && <Empty label="Nenhuma musica gerada." />}
+      {!music && !isSubmitting && <Empty label="Nenhuma música gerada." />}
       {music && (
         <audio controls className="mt-8 w-full">
           <source src={music} />

@@ -16,7 +16,7 @@ const VideoContent = () => {
           <Loader />
         </div>
       )}
-      {!video && !isSubmitting && <Empty label="Nenhum video gerado." />}
+      {!video && !isSubmitting && <Empty label="Nenhum vídeo gerado." />}
       {video && (
         <video
           className="mt-8 aspect-video w-full rounded-lg border bg-black"

@@ -3,7 +3,7 @@ import { Code, ImageIcon, MessageSquare, Music, VideoIcon } from 'lucide-react';
 export const tools = [
   {
     id: 1,
-    label: 'Conversation',
+    label: 'Bate-Papo',
     icon: MessageSquare,
     color: '#8b5cf6',
     bgColor: 'rgba(139, 92, 246 , 0.1)',
@@ -11,7 +11,7 @@ export const tools = [
   },
   {
     id: 2,
-    label: 'Music Generation',
+    label: 'Geração de Música',
     icon: Music,
     color: '#10b981',
     bgColor: 'rgba(16, 185, 129, 0.1)',
@@ -19,7 +19,7 @@ export const tools = [
   },
   {
     id: 3,
-    label: 'Image Generation',
+    label: 'Geração de Imagens',
     icon: ImageIcon,
     color: '#be185d',
     bgColor: 'rgba(190, 24, 93, 0.1)',
@@ -27,7 +27,7 @@ export const tools = [
   },
   {
     id: 4,
-    label: 'Video Generation',
+    label: 'Geração de Vídeos',
     icon: VideoIcon,
     color: '#c2410c',
     bgColor: 'rgba(194, 65, 12, 0.1)',
@@ -35,7 +35,7 @@ export const tools = [
   },
   {
     id: 5,
-    label: 'Code Generation',
+    label: 'Geração de Código',
     icon: Code,
     color: '#15803d',
     bgColor: 'rgba(21, 128, 61, 0.1)',

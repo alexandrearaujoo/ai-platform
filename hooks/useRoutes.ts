@@ -22,42 +22,42 @@ export const useRoutes = () => {
     },
     {
       id: 2,
-      label: 'Conversation',
+      label: 'Bate-Papo',
       icon: MessageSquare,
       href: '/conversation',
       color: '#8b5cf6'
     },
     {
       id: 3,
-      label: 'Image Generation',
+      label: 'Geração de Imagens',
       icon: ImageIcon,
       href: '/image',
       color: '#be185d'
     },
     {
       id: 4,
-      label: 'Video Generation',
+      label: 'Geração de Vídeos',
       icon: VideoIcon,
       href: '/video',
       color: '#c2410c'
     },
     {
       id: 5,
-      label: 'Music Generation',
+      label: 'Geração de Músicas',
       icon: Music,
       href: '/music',
       color: '#10b981'
     },
     {
       id: 6,
-      label: 'Code Generation',
+      label: 'Geração de Codigo',
       icon: Code,
       href: '/code',
       color: '#15803d'
     },
     {
       id: 7,
-      label: 'Settings',
+      label: 'Configurações',
       icon: Settings,
       href: '/settings'
     }
